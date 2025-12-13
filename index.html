@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Master - Game Mengetik</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Key Master ⌨️ <span id="typing-indicator" class="typing-indicator">...</span></h1>
+        
+        <div class="stats-bar">
+            <div id="wpm-display">WPM: 0</div>
+            <div id="accuracy-display">Akurasi: 0%</div>
+            <div id="timer-display">Waktu: 60s</div>
+        </div>
+
+        <div id="typing-area" class="typing-area">
+            </div>
+
+        <input type="text" id="input-field" class="input-field" placeholder="Ketik di sini untuk memulai..." autofocus>
+        
+        <button id="restart-btn" class="restart-btn">Mulai Ulang</button>
+
+        <div class="leaderboard-section">
+            <h2>🏆 Papan Peringkat </h2>
+            <table id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Peringkat</th>
+                        <th>WPM</th>
+                        <th>Akurasi</th>
+                        <th>Nama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+
+    </div> <div id="name-input-modal" class="result-overlay name-input-modal">
+        <div class="modal-box">
+            <h2>Masukkan Nama Anda</h2>
+            <p>Anda menyelesaikan sesi! Catat nama Anda di Papan Peringkat.</p>
+            <input type="text" id="player-name-input" placeholder="Nama..." maxlength="15">
+            <button id="submit-name-btn" class="submit-name-btn">Simpan Skor</button>
+        </div>
+    </div>
+    <div id="result-overlay" class="result-overlay">
+        <div class="result-box">
+            <div id="emote-display" class="emote-display"></div>
+            <h2 id="final-score-title">Hasil Sesi</h2>
+            <p>⚡ Kecepatan (WPM): <span id="final-wpm">0</span></p>
+            <p>🎯 Akurasi: <span id="final-accuracy">0%</span></p>
+            <p>❌ Kesalahan: <span id="final-errors">0</span></p>
+            <button onclick="window.location.reload()">Coba Lagi</button>
+        </div>
+    </div>
+    <footer class="game-footer">
+        <div id="copyright-logo" class="copyright-logo">©</div>
+        <span>2025 | Dibuat oleh Hadi Rahmat</span>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

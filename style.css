@@ -1,0 +1,393 @@
+/* --- 1. GENERAL STYLES (DENGAN PERBAIKAN SCROLL) --- */
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: linear-gradient(135deg, #1f1c2c 0%, #000000 100%);
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* MEMUNGKINKAN SCROLL Y UNTUK LEADERBOARD */
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+
+.game-container {
+    background: #181818;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    border: 3px solid #0ff; /* Neon border */
+    margin-top: 50px; 
+    margin-bottom: 70px; /* Jarak agar tidak bertabrakan dengan footer fixed */
+}
+
+h1 {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    margin-bottom: 20px;
+}
+
+/* --- 2. TYPING AREA & TEXT HIGHLIGHTING --- */
+.typing-area {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    margin: 30px 0;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    text-align: left;
+    min-height: 100px;
+    background-color: #0d0d0d;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Character states */
+.char-correct {
+    color: #00ff88; /* Vibrant Green */
+}
+
+.char-incorrect {
+    color: #ff3333; /* Error Red */
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 3px;
+    animation: shake 0.1s ease-in-out 2;
+}
+
+.char-current {
+    border-bottom: 3px solid #ffcc00; /* Yellow Cursor */
+    animation: cursor-blink 1s step-end infinite;
+}
+
+/* --- 3. INPUT FIELD & BUTTONS --- */
+.input-field {
+    width: 90%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.restart-btn, .result-box button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    background-color: #0ff;
+    color: #181818;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px #00aaff;
+    transition: all 0.1s ease;
+}
+
+.restart-btn:active, .result-box button:active {
+    box-shadow: 0 2px #00aaff;
+    transform: translateY(3px);
+}
+
+/* --- 4. STATS BAR --- */
+.stats-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background-color: #222;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* --- 5. RESULT OVERLAY & ANIMATIONS --- */
+.result-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; 
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.result-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.result-box {
+    background: #181818;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #0ff;
+    text-align: center;
+    transform: scale(0.8);
+    animation: scale-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.result-box h2 {
+    font-size: 2.5rem;
+    margin-top: 10px;
+    color: #fff;
+    text-shadow: 0 0 5px #ffcc00;
+}
+
+.result-box p {
+    font-size: 1.4rem;
+    margin: 10px 0;
+}
+
+.result-box span {
+    font-weight: 700;
+    color: #0ff;
+}
+
+/* Emote Styling */
+.emote-display {
+    font-size: 5rem;
+    margin-bottom: 10px;
+}
+
+/* ANIMASI EMOTE (LEVEL A+) */
+.emote-win {
+    animation: sparkle 1s infinite alternate, bounce 0.5s ease-out;
+}
+
+/* ANIMASI EMOTE (LEVEL C) */
+.emote-ok {
+    animation: pulse 1.5s infinite;
+}
+
+/* --- 6. KEYFRAMES ANIMATIONS --- */
+
+@keyframes cursor-blink {
+    from, to { border-color: transparent }
+    50% { border-color: #ffcc00 }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes scale-in {
+    to { transform: scale(1); }
+}
+
+/* ANIMASI SPESIFIK HASIL */
+@keyframes sparkle {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #ffcc00; }
+    to { text-shadow: 0 0 15px #fff, 0 0 25px #ffcc00; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* --- 7. FOOTER & COPYRIGHT STYLES --- */
+
+.game-footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    color: #666;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5; 
+}
+
+.game-footer span {
+    color: #0ff; 
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.copyright-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #ff33ff; 
+    text-shadow: 0 0 10px #ff33ff, 0 0 20px #ff33ff, 0 0 30px #ff33ff;
+    animation: neon-pulse 2s infinite alternate; 
+    padding: 2px 5px;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+@keyframes neon-pulse {
+    0% {
+        opacity: 0.8;
+        box-shadow: 0 0 5px #ff33ff;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 15px #ff33ff, 0 0 30px #ff33ff;
+        transform: scale(1.05);
+    }
+}
+
+/* --- 8. ANIMASI INDIKATOR TYPING DI JUDUL --- */
+
+.typing-indicator {
+    font-size: 1.2em;
+    color: #ffcc00; 
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1;
+    animation: typing-activity 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes typing-activity {
+    0% {
+        text-shadow: 0 5px 10px rgba(255, 204, 0, 0.5); 
+        transform: scale(0.9) translateY(0); 
+        opacity: 0.9;
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 0 0 25px rgba(255, 204, 0, 0.4);
+        transform: scale(1) translateY(-2px); 
+        opacity: 1;
+    }
+    100% {
+        text-shadow: 0 5px 10px rgba(255, 204, 0, 0.5); 
+        transform: scale(0.9) translateY(0); 
+        opacity: 0.9;
+    }
+}
+
+
+/* --- 9. LEADERBOARD STYLES --- */
+.leaderboard-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.leaderboard-section h2 {
+    color: #ffcc00; 
+    text-shadow: 0 0 5px #ffcc00;
+    margin-bottom: 20px;
+}
+
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid #222;
+    text-align: left;
+    font-size: 1rem;
+}
+
+#leaderboard-table th {
+    background-color: #222;
+    color: #0ff;
+    text-transform: uppercase;
+}
+
+/* Styling baris terbaik */
+#leaderboard-table tbody tr:first-child {
+    background-color: rgba(255, 204, 0, 0.1);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* --- 10. MODAL INPUT NAMA ANIMASI --- */
+
+/* Memanfaatkan kelas result-overlay untuk latar belakang gelap */
+.name-input-modal {
+    z-index: 15; /* Z-index lebih tinggi agar muncul di atas result-overlay */
+}
+
+.modal-box {
+    background: #1f1c2c; /* Warna latar belakang gelap */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(255, 51, 255, 0.5); /* Neon pink shadow */
+    text-align: center;
+    transform: scale(0.7);
+    /* Menggunakan kembali animasi scale-in */
+    animation: scale-in 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; 
+}
+
+.modal-box h2 {
+    color: #ff33ff; /* Neon pink */
+    text-shadow: 0 0 10px #ff33ff;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+#player-name-input {
+    width: 80%;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 1.2rem;
+    border: 2px solid #ff33ff;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(255, 51, 255, 0.3);
+    transition: all 0.2s;
+}
+
+#player-name-input:focus {
+    outline: none;
+    border-color: #0ff; /* Border berubah menjadi neon biru saat fokus */
+    box-shadow: 0 0 15px #0ff;
+}
+
+.submit-name-btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    background-color: #ff33ff; /* Tombol pink */
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px #cc00cc;
+    transition: all 0.1s ease;
+}
+
+.submit-name-btn:active {
+    box-shadow: 0 1px #cc00cc;
+    transform: translateY(3px);
+}
