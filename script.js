@@ -261,20 +261,20 @@ function finishGame() {
     let emoteClass = '';
 
     if (finalWPMValue >= 60 && finalAccuracyValue >= 95) {
-        level = 'SUPERIOR';
+        level = 'AMPUN SUHUUU';
         emote = '👑';
         emoteClass = 'emote-win';
     } else if (finalWPMValue >= 40 && finalAccuracyValue >= 90) {
-        level = 'HEBAT';
+        level = 'HEBAT SEKALI';
         emote = '🔥';
         emoteClass = 'emote-win';
     } else if (finalWPMValue >= 20) {
-        level = 'CUKUP';
+        level = 'CUKUP HANDAL';
         emote = '👍';
         emoteClass = 'emote-ok';
     } else {
-        level = 'PERLU LATIHAN';
-        emote = '😥';
+        level = 'PERLU LATIHAN LAGI YAA';
+        emote = '😥💪';
         emoteClass = '';
     }
 
@@ -321,4 +321,5 @@ playerNameInput.addEventListener('keypress', (e) => {
 
 // --- INIT (PEMUATAN AWAL) ---
 loadText();
+
 loadLeaderboard();
